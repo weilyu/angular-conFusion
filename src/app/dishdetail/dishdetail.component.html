@@ -24,7 +24,7 @@
 
   <div fxFlex="40">
     <h1 md-line *ngIf="dish">Comments</h1>
-    <md-grid-list *ngIf="dish">
+    <md-grid-list cols="1" *ngIf="dish">
       <md-list-item *ngFor="let comment of dish.comments">
         <p md-line>
           {{comment.comment}}<br>
