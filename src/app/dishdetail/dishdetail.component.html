@@ -39,6 +39,14 @@
           -- {{comment.author}} {{comment.date|date}}<br>
         </p>
       </md-list-item>
+      <md-list-item *ngIf="commentForm.valid">
+        <p md-line="">
+          {{commentForm.get('comment').value}}<br>
+          {{commentForm.get('rating').value}} Stars<br>
+          -- {{commentForm.get('author').value}}<br>
+        </p>
+
+      </md-list-item>
     </md-grid-list>
 
     <form novalidate [formGroup]="commentForm" (ngSubmit)="onSubmit()">
