@@ -5,6 +5,7 @@ import {Location} from '@angular/common';
 import {ActivatedRoute, Params} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Comment} from '../shared/comment';
 
 
 @Component({
@@ -89,6 +90,17 @@ export class DishdetailComponent implements OnInit {
         }
       }
     }
+  }
+
+  onSubmit() {
+    let commentToAdd: Comment = this.commentForm.value;
+    commentToAdd.date = new Date().toDateString();
+    this.dish.comments.push(commentToAdd);
+    this.commentForm.reset({
+      'author': '',
+      'rating': 5,
+      'comment': ''
+    });
   }
 
 }
