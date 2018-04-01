@@ -7,36 +7,27 @@ import 'rxjs/add/observable/of';
 import {Http} from '@angular/http';
 import {ProcessHTTPMsgService} from './process-httpmsg.service';
 import {baseURL} from '../shared/baseurl';
+import {Restangular} from 'ngx-restangular';
 
 @Injectable()
 export class PromotionService {
 
-  constructor(private http: Http,
+  constructor(private restangular: Restangular,
               private processHTTPMsgService: ProcessHTTPMsgService) {
   }
 
   getPromotions(): Observable<Promotion[]> {
-    return this.http.get(baseURL + 'promotions').map(res => {
-      return this.processHTTPMsgService.extractData(res);
-    }).catch(error => {
-      return this.processHTTPMsgService.handleError(error);
-    });
+    return this.restangular.all('promotions').getList();
   }
 
   getPromotion(id: number): Observable<Promotion> {
-    return this.http.get(baseURL + 'promotions/' + id).map(res => {
-      return this.processHTTPMsgService.extractData(res);
-    }).catch(error => {
-      return this.processHTTPMsgService.handleError(error);
-    });
+    return this.restangular.one('promotions', id).get();
   }
 
   getFeaturedPromotion(): Observable<Promotion> {
-    return this.http.get(baseURL + 'promotions?featured=true').map(res => {
-      return this.processHTTPMsgService.extractData(res)[0];
-    }).catch(error => {
-      return this.processHTTPMsgService.handleError(error);
-    });
+    return this.restangular.all('promotions').getList({
+      featured: true
+    }).map(promotions => promotions[0]);
   }
 
 }
