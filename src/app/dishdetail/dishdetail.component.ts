@@ -7,14 +7,19 @@ import 'rxjs/add/operator/switchMap';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Comment} from '../shared/comment';
 import {trigger, state, style, animate, transition} from '@angular/animations';
-import {visibility} from '../animations/app.animation';
+import {flyInOut, visibility} from '../animations/app.animation';
 
 
 @Component({
   selector: 'app-dishdetail',
   templateUrl: './dishdetail.component.html',
   styleUrls: ['./dishdetail.component.scss'],
+  host: {
+    '[@flyInOut]': 'true',
+    'style': 'display: block;'
+  },
   animations: [
+    flyInOut(),
     visibility()
   ]
 })
