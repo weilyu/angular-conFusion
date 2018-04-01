@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ContactType, Feedback} from '../shared/feedback';
-import {flyInOut} from '../animations/app.animation';
+import {expand, flyInOut} from '../animations/app.animation';
 import {FeedbackService} from '../services/feedback.service';
 import {timeout} from 'q';
 
@@ -14,7 +14,8 @@ import {timeout} from 'q';
     'style': 'display: block;'
   },
   animations: [
-    flyInOut()
+    flyInOut(),
+    expand()
   ]
 })
 export class ContactComponent implements OnInit {
@@ -92,8 +93,8 @@ export class ContactComponent implements OnInit {
       this.processing = false;
       this.displayingResult = true;
       setTimeout(() => {
-        this.displayingResult = false,
-          this.createForm();
+        this.displayingResult = false;
+        this.createForm();
       }, 5000);
     });
   }
