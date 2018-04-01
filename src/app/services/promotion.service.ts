@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Promotion} from '../shared/promotion';
-import {PROMOTIONS} from '../shared/promotions';
-import {LEADERS} from '../shared/leaders';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/delay';
