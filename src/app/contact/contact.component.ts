@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ContactType, Feedback} from '../shared/feedback';
 import {flyInOut} from '../animations/app.animation';
 import {FeedbackService} from '../services/feedback.service';
+import {timeout} from 'q';
 
 @Component({
   selector: 'app-contact',
@@ -23,6 +24,10 @@ export class ContactComponent implements OnInit {
   feedback: Feedback;
 
   contactType = ContactType;
+
+  processing = false;
+
+  displayingResult = false;
 
   formErrors = {
     'firstname': '',
@@ -81,18 +86,15 @@ export class ContactComponent implements OnInit {
 
   onSubmit() {
     let feedbackToPost = this.feedbackForm.value;
+    this.processing = true;
     this.feedbackService.submitFeedback(feedbackToPost).subscribe(fb => {
       this.feedbackBack = fb;
-    });
-
-    this.feedbackForm.reset({
-      firstname: '',
-      lastname: '',
-      telnum: '',
-      email: '',
-      agree: false,
-      contacttype: 'None',
-      message: ''
+      this.processing = false;
+      this.displayingResult = true;
+      setTimeout(() => {
+        this.displayingResult = false,
+          this.createForm();
+      }, 5000);
     });
   }
 

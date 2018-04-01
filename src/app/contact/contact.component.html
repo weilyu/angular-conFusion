@@ -38,9 +38,26 @@
 
   <div fxFlex fxFlexOffset="20px" class="form-size">
     <h3>Send us your Feedback</h3>
-    <!--<p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p>-->
 
-    <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+    <div *ngIf="processing">
+      <h4>Submitting Form</h4>
+      <md-spinner></md-spinner>
+    </div>
+
+    <!--Result display-->
+    <div *ngIf="displayingResult">
+      <h4>Your Submission</h4>
+      <p>First Name: {{feedbackBack.firstname}}</p>
+      <p>Last Name: {{feedbackBack.lastname}}</p>
+      <p>Tel. Number: {{feedbackBack.telnum}}</p>
+      <p>Email: {{feedbackBack.email}}</p>
+      <p>Contact You?: {{feedbackBack.agree}}</p>
+      <p>How?: {{feedbackBack.contacttype}}</p>
+      <p>Feedback: {{feedbackBack.message}}</p>
+    </div>
+
+    <!--Feedback form-->
+    <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" [hidden]="processing || displayingResult">
       <p>
         <md-input-container class="half-width"
                             dividerColor="{{(formErrors.firstname) ? 'warn' : 'primary'}}">
