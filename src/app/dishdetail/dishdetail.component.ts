@@ -7,7 +7,7 @@ import 'rxjs/add/operator/switchMap';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Comment} from '../shared/comment';
 import {trigger, state, style, animate, transition} from '@angular/animations';
-import {flyInOut, visibility} from '../animations/app.animation';
+import {expand, flyInOut, visibility} from '../animations/app.animation';
 
 
 @Component({
@@ -20,7 +20,8 @@ import {flyInOut, visibility} from '../animations/app.animation';
   },
   animations: [
     flyInOut(),
-    visibility()
+    visibility(),
+    expand()
   ]
 })
 export class DishdetailComponent implements OnInit {
